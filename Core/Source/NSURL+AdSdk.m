@@ -32,6 +32,12 @@
 			return YES;
 		}
 	}
+#ifdef PRODUCTION
+    if ([@"viss" isEqualToString:scheme])
+#else
+    if ([@"vissible" isEqualToString:scheme])
+#endif
+        return YES;
 	return NO;	
 }
 
