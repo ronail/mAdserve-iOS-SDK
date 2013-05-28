@@ -1841,7 +1841,7 @@ static float animationDuration = 0.50;
 
                 interstitialViewController.wantsFullScreenLayout = YES;
 
-                [interstitialViewController presentModalViewController:self.adSdkInterstitialPlayerViewController animated:NO];
+                [interstitialViewController presentModalViewController:self.adSdkInterstitialPlayerViewController animated:YES];
 
                 [self advertAnimateIn:self.advertAnimation advertTypeLoaded:advertType viewToAnimate:self.adSdkInterstitialPlayerViewController.view];
 
@@ -2252,8 +2252,10 @@ static float animationDuration = 0.50;
     }
 
     if (advertType == AdSdkAdTypeInterstitial) {
-        [interstitialViewController dismissModalViewControllerAnimated:NO];
-       [self interstitialTidyUpAfterAnimationOut];
+//        [interstitialViewController dismissModalViewControllerAnimated:NO];
+        [interstitialViewController dismissViewControllerAnimated:YES completion:^{
+            [self interstitialTidyUpAfterAnimationOut];
+        }];
     }
     self.view.hidden = YES;
     self.view.alpha = 0.0;
