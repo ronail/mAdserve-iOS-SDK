@@ -2985,7 +2985,7 @@ static float animationDuration = 0.50;
 	if (tapThroughLeavesApp || [tapThroughURL isDeviceSupported])
 	{
 
-        if ([delegate respondsToSelector:@selector(adsdkBannerViewActionWillLeaveApplication:)])
+        if ([delegate respondsToSelector:@selector(adsdkVideoInterstitialViewActionWillLeaveApplication:)])
         {
             [delegate adsdkVideoInterstitialViewActionWillLeaveApplication:self];
         }
