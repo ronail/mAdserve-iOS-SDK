@@ -9,7 +9,7 @@
 
 @implementation MP_MPInterstitialCustomEvent
 
-@synthesize delegate;
+//@synthesize delegate;
 
 - (void)requestInterstitialWithCustomEventInfo:(NSDictionary *)info
 {
@@ -27,8 +27,7 @@
 {
     // Your subclass should implement -dealloc if it needs to perform any cleanup.
 
-    delegate = nil;
-    [super dealloc];
+    self.delegate = nil;
 }
 
 @end

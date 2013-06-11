@@ -19,12 +19,12 @@
 ////////////////////////////////////////////////////////////////////////////////////////////////////
 
 @interface MR_MRCommand : NSObject {
-    MR_MRAdView *_view;
+    MR_MRAdView *__weak _view;
     NSDictionary *_parameters;
 }
 
-@property (nonatomic, assign) MR_MRAdView *view;
-@property (nonatomic, retain) NSDictionary *parameters;
+@property (nonatomic, weak) MR_MRAdView *view;
+@property (nonatomic, strong) NSDictionary *parameters;
 
 + (NSMutableDictionary *)sharedCommandClassMap;
 + (void)registerCommand:(Class)commandClass;

@@ -11,7 +11,7 @@
 @protocol MPProgressOverlayViewDelegate;
 
 @interface MP_MPProgressOverlayView : UIView {
-    id<MPProgressOverlayViewDelegate> _delegate;
+    id<MPProgressOverlayViewDelegate> __weak _delegate;
     UIView *_outerContainer;
     UIView *_innerContainer;
     UIActivityIndicatorView *_activityIndicator;

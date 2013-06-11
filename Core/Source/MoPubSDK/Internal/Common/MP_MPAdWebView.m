@@ -24,9 +24,9 @@ NSString * const k_kMoPubCustomHost = @"custom";
 
 @interface MP_MPAdWebView ()
 
-@property (nonatomic, retain) MP_MPAdConfiguration *configuration;
-@property (nonatomic, readwrite, retain) UIWebView *webView;
-@property (nonatomic, readwrite, retain) MP_MPAdBrowserController *browserController;
+@property (nonatomic, strong) MP_MPAdConfiguration *configuration;
+@property (nonatomic, readwrite, strong) UIWebView *webView;
+@property (nonatomic, readwrite, strong) MP_MPAdBrowserController *browserController;
 
 - (void)showLoadingIndicatorAnimated:(BOOL)animated;
 - (void)hideLoadingIndicatorAnimated:(BOOL)animated;
@@ -73,15 +73,11 @@ NSString * const k_kMoPubCustomHost = @"custom";
 {
     [self hideLoadingIndicatorAnimated:NO];
 
-    [_configuration release];
 
     _webView.delegate = nil;
     [_webView removeFromSuperview];
-    [_webView release];
 
-    [_browserController release];
 
-    [super dealloc];
 }
 
 #pragma mark - Public
@@ -274,8 +270,8 @@ textEncodingName:(NSString *)textEncodingName baseURL:(NSURL *)baseURL
     }
 
     [self.browserController stopLoading];
-    self.browserController = [[[MP_MPAdBrowserController alloc] initWithURL:redirectedURL
-                                                                delegate:self] autorelease];
+    self.browserController = [[MP_MPAdBrowserController alloc] initWithURL:redirectedURL
+                                                                delegate:self];
     self.browserController.modalTransitionStyle = UIModalTransitionStyleCrossDissolve;
     [self.browserController startLoading];
 
@@ -373,7 +369,7 @@ textEncodingName:(NSString *)textEncodingName baseURL:(NSURL *)baseURL
 		[queryDict setObject:[value stringByReplacingPercentEscapesUsingEncoding:NSUTF8StringEncoding]
 					  forKey:key];
 	}
-	return [queryDict autorelease];
+	return queryDict;
 }
 
 - (void)forceRedraw

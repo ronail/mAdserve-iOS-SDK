@@ -31,8 +31,6 @@
 {
     _interstitialView.delegate = nil;
     _interstitialView.customMethodDelegate = nil;
-    [_interstitialView release];
-    [super dealloc];
 }
 
 - (void)viewDidLoad

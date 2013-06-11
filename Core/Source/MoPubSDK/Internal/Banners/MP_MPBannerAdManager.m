@@ -25,9 +25,9 @@ const CGFloat k_kMoPubRequestRetryInterval = 60.0;
 
 @interface MP_MPBannerAdManager ()
 
-@property (nonatomic, retain) MP_MPBannerDelegateHelper *delegateHelper;
+@property (nonatomic, strong) MP_MPBannerDelegateHelper *delegateHelper;
 @property (nonatomic, readwrite, copy) NSURL *failoverURL;
-@property (nonatomic, retain) UIView *nextAdContentView;
+@property (nonatomic, strong) UIView *nextAdContentView;
 
 - (void)initializeTimerTarget;
 - (void)registerForApplicationStateTransitionNotifications;
@@ -77,20 +77,13 @@ const CGFloat k_kMoPubRequestRetryInterval = 60.0;
     [[NSNotificationCenter defaultCenter] removeObserver:self];
 
     [_autorefreshTimer invalidate];
-    [_autorefreshTimer release];
-	[_timerTarget release];
 
     [_communicator cancel];
     [_communicator setDelegate:nil];
-    [_communicator release];
 
     [_adapterManager setDelegate:nil];
-    [_adapterManager release];
 
-    [_delegateHelper release];
 
-    [_failoverURL release];
-    [super dealloc];
 }
 
 #pragma mark - Public
@@ -249,7 +242,7 @@ const CGFloat k_kMoPubRequestRetryInterval = 60.0;
 - (void)setAdView:(MP_MPAdView *)adView {
     _adView = adView;
 
-    self.delegateHelper = [[[MP_MPBannerDelegateHelper alloc] initWithAdView:adView] autorelease];
+    self.delegateHelper = [[MP_MPBannerDelegateHelper alloc] initWithAdView:adView];
     self.ignoresAutorefresh = adView.ignoresAutorefresh;
 }
 

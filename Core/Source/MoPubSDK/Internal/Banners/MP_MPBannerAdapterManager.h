@@ -13,14 +13,14 @@
 
 @interface MP_MPBannerAdapterManager : NSObject <MPAdapterDelegate>
 {
-    id<MPBannerAdapterManagerDelegate> _delegate;
+    id<MPBannerAdapterManagerDelegate> __weak _delegate;
     MP_MPBaseAdapter *_requestingAdapter;
     MP_MPBaseAdapter *_currentOnscreenAdapter;
 }
 
-@property (nonatomic, assign) id<MPBannerAdapterManagerDelegate> delegate;
-@property (nonatomic, readonly, retain) MP_MPBaseAdapter *requestingAdapter;
-@property (nonatomic, readonly, retain) MP_MPBaseAdapter *currentOnscreenAdapter;
+@property (nonatomic, weak) id<MPBannerAdapterManagerDelegate> delegate;
+@property (nonatomic, readonly, strong) MP_MPBaseAdapter *requestingAdapter;
+@property (nonatomic, readonly, strong) MP_MPBaseAdapter *currentOnscreenAdapter;
 
 - (id)initWithDelegate:(id<MPBannerAdapterManagerDelegate>)delegate;
 - (void)loadAdapterForConfig:(MP_MPAdConfiguration *)config;

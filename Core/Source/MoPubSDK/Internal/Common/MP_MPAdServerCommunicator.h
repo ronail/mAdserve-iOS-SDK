@@ -20,18 +20,18 @@
 @interface MP_MPAdServerCommunicator : NSObject
 #endif
 {
-    id<MPAdServerCommunicatorDelegate> _delegate;
+    id<MPAdServerCommunicatorDelegate> __weak _delegate;
     NSURL *_URL;
     NSURLConnection *_connection;
     NSMutableData *_responseData;
     NSDictionary *_responseHeaders;
 }
 
-@property (nonatomic, assign) id<MPAdServerCommunicatorDelegate> delegate;
+@property (nonatomic, weak) id<MPAdServerCommunicatorDelegate> delegate;
 @property (nonatomic, copy) NSURL *URL;
-@property (nonatomic, retain) NSURLConnection *connection;
-@property (nonatomic, retain) NSMutableData *responseData;
-@property (nonatomic, retain) NSDictionary *responseHeaders;
+@property (nonatomic, strong) NSURLConnection *connection;
+@property (nonatomic, strong) NSMutableData *responseData;
+@property (nonatomic, strong) NSDictionary *responseHeaders;
 
 - (void)loadURL:(NSURL *)URL;
 - (void)cancel;

@@ -32,8 +32,8 @@ NSString * const k_kMoPubCustomHost;
     MPProgressOverlayViewDelegate>
 {
     UIWebView *_webView;
-    id<MPAdWebViewDelegate> _delegate;
-    id _customMethodDelegate;
+    id<MPAdWebViewDelegate> __weak _delegate;
+    id __weak _customMethodDelegate;
 
     MP_MPAdConfiguration *_configuration;
     MP_MPAdBrowserController *_browserController;
@@ -42,10 +42,10 @@ NSString * const k_kMoPubCustomHost;
     BOOL _dismissed;
 }
 
-@property (nonatomic, readonly, retain) UIWebView *webView;
-@property (nonatomic, assign) id<MPAdWebViewDelegate> delegate;
-@property (nonatomic, assign) id customMethodDelegate;
-@property (nonatomic, readonly, retain) MP_MPAdBrowserController *browserController;
+@property (nonatomic, readonly, strong) UIWebView *webView;
+@property (nonatomic, weak) id<MPAdWebViewDelegate> delegate;
+@property (nonatomic, weak) id customMethodDelegate;
+@property (nonatomic, readonly, strong) MP_MPAdBrowserController *browserController;
 @property (nonatomic, assign, getter=isDismissed) BOOL dismissed;
 
 - (void)loadConfiguration:(MP_MPAdConfiguration *)configuration;

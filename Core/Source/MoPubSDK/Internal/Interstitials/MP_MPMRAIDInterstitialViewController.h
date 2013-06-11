@@ -18,13 +18,13 @@
 
 @interface MP_MPMRAIDInterstitialViewController : MP_MPInterstitialViewController <MRAdViewDelegate>
 {
-    id<MPMRAIDInterstitialViewControllerDelegate> _delegate;
+    id<MPMRAIDInterstitialViewControllerDelegate> __weak _delegate;
     MR_MRAdView *_interstitialView;
     MP_MPAdConfiguration *_configuration;
     BOOL _advertisementHasCustomCloseButton;
 }
 
-@property (nonatomic, assign) id<MPMRAIDInterstitialViewControllerDelegate> delegate;
+@property (nonatomic, weak) id<MPMRAIDInterstitialViewControllerDelegate> delegate;
 
 - (id)initWithAdConfiguration:(MP_MPAdConfiguration *)configuration;
 - (void)startLoading;

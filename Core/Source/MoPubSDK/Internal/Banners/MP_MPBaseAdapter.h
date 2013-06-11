@@ -15,12 +15,12 @@
 
 @interface MP_MPBaseAdapter : NSObject 
 {
-	id<MPAdapterDelegate> _delegate;
+	id<MPAdapterDelegate> __weak _delegate;
     NSURL *_impressionTrackingURL;
     NSURL *_clickTrackingURL;
 }
 
-@property (nonatomic, readonly) id<MPAdapterDelegate> delegate;
+@property (weak, nonatomic, readonly) id<MPAdapterDelegate> delegate;
 @property (nonatomic, copy) NSURL *impressionTrackingURL;
 @property (nonatomic, copy) NSURL *clickTrackingURL;
 

@@ -53,18 +53,13 @@
 
 - (void)dealloc
 {
-    [_request release];
 
     [_communicator cancel];
     [_communicator setDelegate:nil];
-    [_communicator release];
 
     [_currentAdapter unregisterDelegate];
-    [_currentAdapter release];
     [_nextAdapter unregisterDelegate];
-    [_nextAdapter release];
 
-    [super dealloc];
 }
 
 #pragma mark - Public
@@ -174,7 +169,7 @@
 {
     self.failoverURL = [configuration failoverURL];
 
-    _nextConfiguration = [configuration retain];
+    _nextConfiguration = configuration;
 
     MPLogInfo(@"Ad view is fetching ad network type: %@", configuration.networkType);
 
@@ -187,15 +182,15 @@
 
     Class adapterClass = [[MP_MPAdapterMap sharedAdapterMap] interstitialAdapterClassForNetworkType:
                           _nextConfiguration.networkType];
-    MP_MPBaseInterstitialAdapter *adapter = [[[adapterClass alloc] initWithInterstitialAdController:
-                                           _interstitialAdController] autorelease];
+    MP_MPBaseInterstitialAdapter *adapter = [[adapterClass alloc] initWithInterstitialAdController:
+                                           _interstitialAdController];
 
     if (!adapter) {
         [self adapter:nil didFailToLoadAdWithError:nil];
         return;
     }
 
-    _nextAdapter = [adapter retain];
+    _nextAdapter = adapter;
     _nextAdapter.manager = self;
     [self requestInterstitialFromAdapter:_nextAdapter forConfiguration:_nextConfiguration];
 }
@@ -248,7 +243,6 @@
     _hasRecordedClickForCurrentInterstitial = NO;
 
     [_currentAdapter unregisterDelegate];
-    [_currentAdapter release];
     _currentAdapter = _nextAdapter;
     _nextAdapter = nil;
 
@@ -265,13 +259,11 @@
 
     if (adapter == _nextAdapter) {
         [_nextAdapter unregisterDelegate];
-        [_nextAdapter release];
         _nextAdapter = nil;
         _nextConfiguration = nil;
         [self loadAdWithURL:self.failoverURL];
     } else if (adapter == _currentAdapter) {
         [_currentAdapter unregisterDelegate];
-        [_currentAdapter release];
         _currentAdapter = nil;
         _currentConfiguration = nil;
         [self.delegate manager:self didFailToLoadInterstitialWithError:error];

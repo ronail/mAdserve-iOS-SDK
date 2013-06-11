@@ -31,7 +31,7 @@
                                            closeButtonStyle:MRAdViewCloseButtonStyleAdControlled
                                               placementType:MRAdViewPlacementTypeInterstitial];
         _interstitialView.delegate = self;
-        _configuration = [configuration retain];
+        _configuration = configuration;
         _orientationType = [_configuration orientationType];
         _advertisementHasCustomCloseButton = NO;
     }
@@ -41,9 +41,6 @@
 - (void)dealloc
 {
     _interstitialView.delegate = nil;
-    [_interstitialView release];
-    [_configuration release];
-    [super dealloc];
 }
 
 - (void)viewDidLoad

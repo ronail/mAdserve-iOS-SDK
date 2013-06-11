@@ -18,9 +18,9 @@
     UIView *_requestedAd;
 }
 
-@property (nonatomic, retain) UIView *requestedAd;
-@property (nonatomic, readwrite, retain) MP_MPBaseAdapter *requestingAdapter;
-@property (nonatomic, readwrite, retain) MP_MPBaseAdapter *currentOnscreenAdapter;
+@property (nonatomic, strong) UIView *requestedAd;
+@property (nonatomic, readwrite, strong) MP_MPBaseAdapter *requestingAdapter;
+@property (nonatomic, readwrite, strong) MP_MPBaseAdapter *currentOnscreenAdapter;
 
 @end
 
@@ -46,15 +46,11 @@
 {
     _delegate = nil;
 
-    [_requestedAd release];
 
     [_requestingAdapter unregisterDelegate];
-    [_requestingAdapter release];
 
     [_currentOnscreenAdapter unregisterDelegate];
-    [_currentOnscreenAdapter release];
 
-    [super dealloc];
 }
 
 #pragma mark - Public
@@ -75,7 +71,7 @@
 
     Class adapterClass = [[MP_MPAdapterMap sharedAdapterMap] bannerAdapterClassForNetworkType:
                           [config networkType]];
-    MP_MPBaseAdapter *adapter = [[[adapterClass alloc] initWithAdapterDelegate:self] autorelease];
+    MP_MPBaseAdapter *adapter = [[adapterClass alloc] initWithAdapterDelegate:self];
 
     if (!adapter) {
         MPLogInfo(@"Could not create adapter for banner network type: %@.", [config networkType]);

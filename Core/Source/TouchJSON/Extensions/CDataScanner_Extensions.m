@@ -117,8 +117,8 @@ else
     NSRange theEndRange = NSIntersectionRange((NSRange){ .location = self.scanLocation, .length = 20 }, (NSRange){ .location = 0, .length = self.data.length });
 
     NSString *theSnippet = [NSString stringWithFormat:@"%@!HERE>!%@",
-        [[[NSString alloc] initWithData:[self.data subdataWithRange:theStartRange] encoding:NSUTF8StringEncoding] autorelease],
-        [[[NSString alloc] initWithData:[self.data subdataWithRange:theEndRange] encoding:NSUTF8StringEncoding] autorelease]
+        [[NSString alloc] initWithData:[self.data subdataWithRange:theStartRange] encoding:NSUTF8StringEncoding],
+        [[NSString alloc] initWithData:[self.data subdataWithRange:theEndRange] encoding:NSUTF8StringEncoding]
         ];
 
     NSDictionary *theUserInfo = [NSDictionary dictionaryWithObjectsAndKeys:

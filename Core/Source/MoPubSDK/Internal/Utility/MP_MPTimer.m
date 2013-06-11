@@ -11,7 +11,7 @@
 
 @interface MP_MPTimer ()
 @property (nonatomic, assign) NSTimeInterval timeInterval;
-@property (nonatomic, retain) NSTimer *timer;
+@property (nonatomic, strong) NSTimer *timer;
 @property (nonatomic, copy) NSDate *pauseDate;
 @end
 
@@ -32,7 +32,7 @@
                                              userInfo:userInfo 
                                               repeats:repeats];
     m.timeInterval = seconds;
-    return [m autorelease];
+    return m;
 }
 
 + (MP_MPTimer *)timerWithTimeInterval:(NSTimeInterval)seconds target:(id)target 
@@ -45,15 +45,12 @@
 									userInfo:userInfo 
 									 repeats:repeats];
     m.timeInterval = seconds;
-	return [m autorelease];
+	return m;
 }
 
 - (void)dealloc
 {
 	[_timer invalidate];
-	[_timer release];
-	[_pauseDate release];
-	[super dealloc];
 }
 
 - (BOOL)isValid
@@ -69,7 +66,7 @@
 - (BOOL)isScheduled
 {
 	CFRunLoopRef runLoopRef = [[NSRunLoop currentRunLoop] getCFRunLoop];
-	return CFRunLoopContainsTimer(runLoopRef, (CFRunLoopTimerRef)self.timer, kCFRunLoopDefaultMode);
+	return CFRunLoopContainsTimer(runLoopRef, (__bridge CFRunLoopTimerRef)self.timer, kCFRunLoopDefaultMode);
 }
 
 - (BOOL)scheduleNow
@@ -161,11 +158,6 @@
 	return self;
 }
 
-- (void)dealloc
-{
-	[_notificationName release];
-	[super dealloc];
-}
 
 - (void)postNotification
 {

@@ -13,10 +13,10 @@
 
 @interface MR_MRAdViewBrowsingController : NSObject <MPAdBrowserControllerDelegate> {
     MR_MRAdView *_view;
-    UIViewController *_viewControllerForPresentingModalView;
+    UIViewController *__weak _viewControllerForPresentingModalView;
 }
 
-@property (nonatomic, assign) UIViewController *viewControllerForPresentingModalView;
+@property (nonatomic, weak) UIViewController *viewControllerForPresentingModalView;
 
 - (id)initWithAdView:(MR_MRAdView *)adView;
 - (void)openBrowserWithUrlString:(NSString *)urlString enableBack:(BOOL)back

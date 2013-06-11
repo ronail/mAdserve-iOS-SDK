@@ -26,9 +26,7 @@
 {
     _banner.delegate = nil;
     _banner.customMethodDelegate = nil;
-    [_banner release];
 
-    [super dealloc];
 }
 
 - (void)rotateToOrientation:(UIInterfaceOrientation)newOrientation

@@ -14,6 +14,6 @@
     MR_MRAdView *_adView;
 }
 
-@property(nonatomic,retain) MR_MRAdView* _adView;
+@property(nonatomic,strong) MR_MRAdView* _adView;
 
 @end

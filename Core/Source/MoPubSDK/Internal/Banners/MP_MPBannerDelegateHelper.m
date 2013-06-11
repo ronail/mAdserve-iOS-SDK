@@ -10,8 +10,8 @@
 @implementation MP_MPBannerDelegateHelper
 
 @synthesize adView = _adView;
-@synthesize adViewDelegate;
-@synthesize rootViewController;
+//@synthesize adViewDelegate;
+//@synthesize rootViewController;
 
 - (id)initWithAdView:(MP_MPAdView *)adView
 {
@@ -22,11 +22,6 @@
     return self;
 }
 
-- (void)dealloc
-{
-    _adView = nil;
-    [super dealloc];
-}
 
 - (MP_MPAdView *)adView
 {

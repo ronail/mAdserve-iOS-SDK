@@ -63,23 +63,23 @@ extern NSString * const k_kAdTypeMraid;
     MPInterstitialOrientationType _orientationType;
 }
 
-@property (nonatomic, retain) NSDictionary *headers;
+@property (nonatomic, strong) NSDictionary *headers;
 @property (nonatomic, assign) MPAdType adType;
 @property (nonatomic, copy) NSString *networkType;
 @property (nonatomic, assign) CGSize adSize;
 @property (nonatomic, assign) CGSize preferredSize;
-@property (nonatomic, retain) NSURL *clickTrackingURL;
-@property (nonatomic, retain) NSURL *impressionTrackingURL;
-@property (nonatomic, retain) NSURL *failoverURL;
-@property (nonatomic, retain) NSURL *interceptURLPrefix;
+@property (nonatomic, strong) NSURL *clickTrackingURL;
+@property (nonatomic, strong) NSURL *impressionTrackingURL;
+@property (nonatomic, strong) NSURL *failoverURL;
+@property (nonatomic, strong) NSURL *interceptURLPrefix;
 @property (nonatomic, assign) BOOL shouldInterceptLinks;
 @property (nonatomic, assign) BOOL scrollable;
 @property (nonatomic, assign) NSTimeInterval refreshInterval;
 @property (nonatomic, copy) NSData *adResponseData;
-@property (nonatomic, retain) NSDictionary *nativeSDKParameters;
+@property (nonatomic, strong) NSDictionary *nativeSDKParameters;
 @property (nonatomic, copy) NSString *customSelectorName;
 @property (nonatomic, assign) Class customEventClass;
-@property (nonatomic, retain) NSDictionary *customEventClassData;
+@property (nonatomic, strong) NSDictionary *customEventClassData;
 @property (nonatomic, assign) MPInterstitialOrientationType orientationType;
 
 - (id)init;

@@ -9,7 +9,7 @@
 
 @implementation MP_MPBannerCustomEvent
 
-@synthesize delegate;
+//@synthesize delegate;
 
 - (void)requestAdWithSize:(CGSize)size customEventInfo:(NSDictionary *)info
 {
@@ -20,9 +20,7 @@
 - (void)dealloc
 {
     // Your subclass should implement -dealloc if it needs to perform any cleanup.
-
-    delegate = nil;
-    [super dealloc];
+    self.delegate = nil;
 }
 
 @end

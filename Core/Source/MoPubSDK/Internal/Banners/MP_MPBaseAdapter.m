@@ -41,10 +41,6 @@
 - (void)dealloc
 {
 	[self unregisterDelegate];
-    [_impressionTrackingURL release];
-    [_clickTrackingURL release];
-    [_metricsURLRequest release];
-	[super dealloc];
 }
 
 - (void)unregisterDelegate
@@ -65,9 +61,7 @@
     self.impressionTrackingURL = [configuration impressionTrackingURL];
     self.clickTrackingURL = [configuration clickTrackingURL];
 
-    [self retain];
     [self getAdWithConfiguration:configuration];
-    [self release];
 }
 
 #pragma mark - Rotation
@@ -110,9 +104,7 @@
 
 - (void)_getAdWithParams:(NSDictionary *)params
 {
-    [self retain];
     [self getAdWithParams:params];
-    [self release];
 }
 
 @end

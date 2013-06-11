@@ -11,7 +11,7 @@
 
 @interface MP_MPAdBrowserController ()
 
-@property (nonatomic, retain) UIActionSheet *actionSheet;
+@property (nonatomic, strong) UIActionSheet *actionSheet;
 
 - (void)dismissActionSheet;
 - (BOOL)shouldLeaveApplicationForURL:(NSURL *)URL;
@@ -41,17 +41,17 @@ static NSArray *BROWSER_SCHEMES, *SPECIAL_HOSTS;
 + (void)initialize
 {
 	// Schemes that should be handled by the in-app browser.
-	BROWSER_SCHEMES = [[NSArray arrayWithObjects:
+	BROWSER_SCHEMES = [NSArray arrayWithObjects:
 						@"http",
 						@"https",
-						nil] retain];
+						nil];
 	// Hosts that should be handled by the OS.
-	SPECIAL_HOSTS = [[NSArray arrayWithObjects:
+	SPECIAL_HOSTS = [NSArray arrayWithObjects:
 					  @"phobos.apple.com",
                       @"maps.apple.com",
 					  @"maps.google.com",
                       @"itunes.apple.com",
-					  nil] retain];
+					  nil];
 }
 
 #pragma mark -
@@ -82,17 +82,6 @@ static NSArray *BROWSER_SCHEMES, *SPECIAL_HOSTS;
 {
 	_delegate = nil;
 	_webView.delegate = nil;
-	[_webView release];
-	[_URL release];
-	[_backButton release];
-	[_forwardButton release];
-	[_refreshButton release];
-	[_safariButton release];
-	[_doneButton release];
-	[_spinner release];
-	[_spinnerItem release];
-	[_actionSheet release];
-	[super dealloc];
 }
 
 - (void)viewDidLoad
@@ -202,11 +191,11 @@ static NSArray *BROWSER_SCHEMES, *SPECIAL_HOSTS;
 	}
 	else 
 	{
-		self.actionSheet = [[[UIActionSheet alloc] initWithTitle:nil
+		self.actionSheet = [[UIActionSheet alloc] initWithTitle:nil
 													   delegate:self 
 											  cancelButtonTitle:@"Cancel" 
 										 destructiveButtonTitle:nil 
-											  otherButtonTitles:@"Open in Safari", nil] autorelease];
+											  otherButtonTitles:@"Open in Safari", nil];
 
         if ([UIActionSheet instancesRespondToSelector:@selector(showFromBarButtonItem:animated:)]) {
             [self.actionSheet showFromBarButtonItem:self.safariButton animated:YES];
@@ -427,7 +416,7 @@ static NSArray *BROWSER_SCHEMES, *SPECIAL_HOSTS;
 	CGContextRelease(context);
 	UIImage *image = [[UIImage alloc] initWithCGImage:imageRef];
 	CGImageRelease(imageRef);
-	return [image autorelease];
+	return image;
 }
 
 - (UIImage *)forwardArrowImage
@@ -445,7 +434,7 @@ static NSArray *BROWSER_SCHEMES, *SPECIAL_HOSTS;
 	CGContextRelease(context);
 	UIImage *image = [[UIImage alloc] initWithCGImage:imageRef];
 	CGImageRelease(imageRef);
-	return [image autorelease];
+	return image;
 }
 
 #pragma mark -

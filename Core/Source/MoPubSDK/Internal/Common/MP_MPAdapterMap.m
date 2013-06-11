@@ -10,8 +10,8 @@
 
 @interface MP_MPAdapterMap ()
 
-@property (nonatomic, retain) NSDictionary *bannerAdapterMap;
-@property (nonatomic, retain) NSDictionary *interstitialAdapterMap;
+@property (nonatomic, strong) NSDictionary *bannerAdapterMap;
+@property (nonatomic, strong) NSDictionary *interstitialAdapterMap;
 
 @end
 
@@ -37,7 +37,7 @@
 {
 	if (self = [super init])
 	{
-        bannerAdapterMap = [[NSDictionary dictionaryWithObjectsAndKeys:
+        bannerAdapterMap = [NSDictionary dictionaryWithObjectsAndKeys:
                              @"MP_MPHTMLBannerAdapter",        @"html",
                              @"MP_MPMRAIDBannerAdapter",       @"mraid",
                              @"MP_MPIAdAdapter",               @"iAd",
@@ -45,26 +45,20 @@
                              @"MP_MPGoogleAdMobAdapter",       @"admob_native",
                              @"MP_MPMillennialAdapter",        @"millennial_native",
                              @"MP_MPBannerCustomEventAdapter", @"custom",
-                             nil] retain];
+                             nil];
 
-        interstitialAdapterMap = [[NSDictionary dictionaryWithObjectsAndKeys:
+        interstitialAdapterMap = [NSDictionary dictionaryWithObjectsAndKeys:
                                    @"MP_MPHTMLInterstitialAdapter",        @"html",
                                    @"MP_MPMRAIDInterstitialAdapter",       @"mraid",
                                    @"MP_MPIAdInterstitialAdapter",         @"iAd_full",
                                    @"MP_MPGoogleAdMobInterstitialAdapter", @"admob_full",
                                    @"MP_MPMillennialInterstitialAdapter",  @"millennial_full",
                                    @"MP_MPInterstitialCustomEventAdapter", @"custom",
-                                   nil] retain];
+                                   nil];
 	}
 	return self;
 }
 
-- (void)dealloc
-{
-    self.bannerAdapterMap = nil;
-	self.interstitialAdapterMap = nil;
-	[super dealloc];
-}
 
 - (Class)bannerAdapterClassForNetworkType:(NSString *)networkType
 {

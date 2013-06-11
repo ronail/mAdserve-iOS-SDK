@@ -27,7 +27,7 @@
 @synthesize placementType = _placementType;
 
 + (MR_MRPlacementTypeProperty *)propertyWithType:(MRAdViewPlacementType)type {
-    MR_MRPlacementTypeProperty *property = [[[self alloc] init] autorelease];
+    MR_MRPlacementTypeProperty *property = [[self alloc] init];
     property.placementType = type;
     return property;
 }
@@ -52,7 +52,7 @@
 @synthesize state = _state;
 
 + (MR_MRStateProperty *)propertyWithState:(MRAdViewState)state {
-    MR_MRStateProperty *property = [[[self alloc] init] autorelease];
+    MR_MRStateProperty *property = [[self alloc] init];
     property.state = state;
     return property;
 }
@@ -77,7 +77,7 @@
 @synthesize screenSize = _screenSize;
 
 + (MR_MRScreenSizeProperty *)propertyWithSize:(CGSize)size {
-    MR_MRScreenSizeProperty *property = [[[self alloc] init] autorelease];
+    MR_MRScreenSizeProperty *property = [[self alloc] init];
     property.screenSize = size;
     return property;
 }
@@ -97,7 +97,7 @@
 @synthesize isViewable = _isViewable;
 
 + (MR_MRViewableProperty *)propertyWithViewable:(BOOL)viewable {
-    MR_MRViewableProperty *property = [[[self alloc] init] autorelease];
+    MR_MRViewableProperty *property = [[self alloc] init];
     property.isViewable = viewable;
     return property;
 }

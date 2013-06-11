@@ -22,8 +22,8 @@ static NSString * const kNewContentViewKey = @"NewContentView";
 
 @interface MP_MPAdView ()
 
-@property (nonatomic, retain) MP_MPBannerAdManager *adManager;
-@property (nonatomic, retain) NSArray *locationDescriptionPair;
+@property (nonatomic, strong) MP_MPBannerAdManager *adManager;
+@property (nonatomic, strong) NSArray *locationDescriptionPair;
 
 - (id)initWithAdUnitId:(NSString *)adUnitId size:(CGSize)size adManager:(MP_MPBannerAdManager *)adManager;
 - (void)updateLocationDescriptionPair;
@@ -61,7 +61,7 @@ static NSString * const kNewContentViewKey = @"NewContentView";
 
 - (id)initWithAdUnitId:(NSString *)adUnitId size:(CGSize)size 
 { 
-    MP_MPBannerAdManager *adManager = [[[MP_MPBannerAdManager alloc] init] autorelease];
+    MP_MPBannerAdManager *adManager = [[MP_MPBannerAdManager alloc] init];
 	return [self initWithAdUnitId:adUnitId size:size adManager:adManager];
 }
 
@@ -78,7 +78,7 @@ static NSString * const kNewContentViewKey = @"NewContentView";
 		_originalSize = size;
 		_allowedNativeAdOrientation = MPNativeAdOrientationAny;
         _adUnitId = (adUnitId) ? [adUnitId copy] : [[NSString alloc] initWithString:DEFAULT_PUB_ID];
-		_adManager = [adManager retain];
+		_adManager = adManager;
         _adManager.adView = self;
     }
     return self;
@@ -87,27 +87,20 @@ static NSString * const kNewContentViewKey = @"NewContentView";
 - (void)dealloc 
 {
     _delegate = nil;
-	[_adUnitId release];
 	[[NSNotificationCenter defaultCenter] removeObserver:self];
 
 	// If our content has a delegate, set its delegate to nil.
 	if ([_adContentView respondsToSelector:@selector(setDelegate:)])
 		[_adContentView performSelector:@selector(setDelegate:) withObject:nil];
-	[_adContentView release];
 	_adManager.adView = nil;
     [_adManager cancelAd];
-	[_adManager release];
 
-	[_location release];
-	[_locationDescriptionPair release];
-    [super dealloc];
 }
 
 #pragma mark -
 
 - (void)setLocation:(CLLocation *)location {
 	if (_location != location) {
-		[_location release];
 		_location = [location copy];
 		[self updateLocationDescriptionPair];
 	}
@@ -150,7 +143,6 @@ static NSString * const kNewContentViewKey = @"NewContentView";
 
 - (void)setAdContentView:(UIView *)view
 {
-    [view retain];
 	// We don't necessarily know where this view came from, so make sure its scrollability
 	// corresponds to our value of self.scrollable.
 	[self setScrollable:self.scrollable forView:view];
@@ -181,12 +173,12 @@ static NSString * const kNewContentViewKey = @"NewContentView";
         [self addSubview:view];
         [self animationDidStop:kAdAnimationId 
 					  finished:[NSNumber numberWithBool:YES] 
-					   context:oldContentView];
+					   context:(__bridge void *)(oldContentView)];
         return;
     }
 	if (type == MPAdAnimationTypeFade) view.alpha = 0.0;
 	MPLogDebug(@"Ad view (%p) is using animationType: %d", self, type);
-    [UIView beginAnimations:kAdAnimationId context:oldContentView];
+    [UIView beginAnimations:kAdAnimationId context:(__bridge void *)(oldContentView)];
     [UIView setAnimationDelegate:self];
     [UIView setAnimationDidStopSelector:@selector(animationDidStop:finished:context:)];
     [UIView setAnimationDuration:1.0];
@@ -237,7 +229,7 @@ static NSString * const kNewContentViewKey = @"NewContentView";
 {
 	if ([animationID isEqualToString:kAdAnimationId])
 	{
-		UIView *oldContentView = (UIView *)context;
+		UIView *oldContentView = (__bridge UIView *)context;
 
 		// _adContentView is the new view that was just added to the view hierarchy.
 		UIView *newContentView = _adContentView;
@@ -249,7 +241,6 @@ static NSString * const kNewContentViewKey = @"NewContentView";
 		}
 
 		// Release the old content view to balance the retain in -setAdContentView:.
-		[oldContentView release];
 
         [newContentView setUserInteractionEnabled:YES];
 	}

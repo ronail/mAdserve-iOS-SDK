@@ -38,7 +38,7 @@ typedef enum
 @interface MP_MPAdView : UIView
 {
 	// Delegate object for the ad view.
-	id<MPAdViewDelegate> _delegate;
+	id<MPAdViewDelegate> __weak _delegate;
 	// "Business-logic" object for the ad view.
 	MP_MPBannerAdManager *_adManager;
 	// Ad unit identifier for the ad view.
@@ -71,10 +71,10 @@ typedef enum
 	BOOL _ignoresAutorefresh;
 }
 
-@property (nonatomic, assign) id<MPAdViewDelegate> delegate;
+@property (nonatomic, weak) id<MPAdViewDelegate> delegate;
 @property (nonatomic, copy) NSString *adUnitId;
 @property (nonatomic, copy) CLLocation *location;
-@property (nonatomic, retain) NSString *keywords;
+@property (nonatomic, strong) NSString *keywords;
 @property (nonatomic, assign) CGSize creativeSize;
 @property (nonatomic, assign) BOOL scrollable;
 @property (nonatomic, assign) BOOL locationEnabled;
@@ -82,7 +82,7 @@ typedef enum
 @property (nonatomic, assign) MPAdAnimationType animationType;
 @property (nonatomic, assign) BOOL ignoresAutorefresh;
 @property (nonatomic, assign, getter = isTesting) BOOL testing;
-@property (nonatomic, retain) UIView *adContentView;
+@property (nonatomic, strong) UIView *adContentView;
 @property (nonatomic, assign) CGSize originalSize;
 
 /*

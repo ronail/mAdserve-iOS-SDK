@@ -11,12 +11,12 @@
 
 @interface MP_MPBannerDelegateHelper : NSObject
 {
-    MP_MPAdView *_adView;
+    MP_MPAdView *__weak _adView;
 }
 
-@property (nonatomic, readonly) MP_MPAdView *adView;
-@property (nonatomic, readonly) id<MPAdViewDelegate> adViewDelegate;
-@property (nonatomic, readonly) UIViewController *rootViewController;
+@property (weak, nonatomic, readonly) MP_MPAdView *adView;
+@property (weak, nonatomic, readonly) id<MPAdViewDelegate> adViewDelegate;
+@property (weak, nonatomic, readonly) UIViewController *rootViewController;
 
 - (id)initWithAdView:(MP_MPAdView *)adView;
 

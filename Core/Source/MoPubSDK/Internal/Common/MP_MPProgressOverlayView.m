@@ -13,7 +13,7 @@
 
 @interface MP_MPProgressOverlayView ()
 
-@property (nonatomic, assign) id<MPProgressOverlayViewDelegate> delegate;
+@property (nonatomic, weak) id<MPProgressOverlayViewDelegate> delegate;
 
 + (BOOL)windowHasExistingOverlay:(UIWindow *)window;
 + (MP_MPProgressOverlayView *)overlayForWindow:(UIWindow *)window;
@@ -55,7 +55,7 @@ static void exponentialDecayInterpolation(void *info, const float *input, float 
         self.opaque = NO;
 
         // Close button.
-        _closeButton = [[UIButton buttonWithType:UIButtonTypeCustom] retain];
+        _closeButton = [UIButton buttonWithType:UIButtonTypeCustom];
         _closeButton.alpha = 0.0;
         _closeButton.hidden = YES;
         [_closeButton addTarget:self 
@@ -119,11 +119,6 @@ static void exponentialDecayInterpolation(void *info, const float *input, float 
 - (void)dealloc
 {
     [self unregisterForDeviceOrientationNotifications];
-    [_activityIndicator release];
-    [_closeButton release];
-    [_innerContainer release];
-    [_outerContainer release];
-    [super dealloc];
 }
 
 #pragma mark - Public Class Methods
@@ -179,7 +174,7 @@ static void exponentialDecayInterpolation(void *info, const float *input, float 
     static const float output_value_range[8] = {0, 1, 0, 1, 0, 1, 0, 1};
     CGFunctionCallbacks callbacks = {0, exponentialDecayInterpolation, NULL};
 
-    CGFunctionRef shadingFunction = CGFunctionCreate(self, 1, input_value_range, 4,
+    CGFunctionRef shadingFunction = CGFunctionCreate((__bridge void *)(self), 1, input_value_range, 4,
                                                      output_value_range, &callbacks);
 
     CGPoint startPoint = CGPointMake(CGRectGetMidX(self.bounds), CGRectGetMidY(self.bounds));

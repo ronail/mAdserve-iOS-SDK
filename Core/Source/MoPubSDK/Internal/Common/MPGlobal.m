@@ -77,7 +77,6 @@ NSString *MP_MPUserAgentString()
     if (!userAgent) {
         UIWebView *webview = [[UIWebView alloc] init];
         userAgent = [[webview stringByEvaluatingJavaScriptFromString:@"navigator.userAgent"] copy];
-        [webview release];
     }
     return userAgent;
 }
@@ -125,7 +124,6 @@ NSString *MP_MPAdvertisingIdentifier()
     cachedIdentifier = [NSString stringWithFormat:@"sha:%@", [identifier uppercaseString]];
 #endif
 
-    [cachedIdentifier retain];
     return cachedIdentifier;
 }
 
@@ -221,12 +219,12 @@ BOOL MP_MPViewIntersectsKeyWindow(UIView *view)
 
 - (NSString *)URLEncodedString
 {
-	NSString *result = (NSString *)CFURLCreateStringByAddingPercentEscapes(NULL,
+	NSString *result = (NSString *)CFBridgingRelease(CFURLCreateStringByAddingPercentEscapes(NULL,
 																		   (CFStringRef)self,
 																		   NULL,
 																		   (CFStringRef)@"!*'();:@&=+$,/?%#[]<>",
-																		   kCFStringEncodingUTF8);
-	return [result autorelease];
+																		   kCFStringEncodingUTF8));
+	return result;
 }
 
 @end

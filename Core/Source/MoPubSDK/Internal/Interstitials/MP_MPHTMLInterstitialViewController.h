@@ -19,11 +19,11 @@
 
 @interface MP_MPHTMLInterstitialViewController : MP_MPInterstitialViewController <MPAdWebViewDelegate>
 {
-    id<MPHTMLInterstitialViewControllerDelegate> _delegate;
+    id<MPHTMLInterstitialViewControllerDelegate> __weak _delegate;
     MP_MPAdWebView *_interstitialView;
 }
 
-@property (nonatomic, assign) id<MPHTMLInterstitialViewControllerDelegate> delegate;
+@property (nonatomic, weak) id<MPHTMLInterstitialViewControllerDelegate> delegate;
 
 - (id)customMethodDelegate;
 - (void)setCustomMethodDelegate:(id)delegate;

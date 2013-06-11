@@ -80,24 +80,24 @@ NSString * const k_kAdTypeMraid = @"mraid";
 {
     self = [self init];
     if (self) {
-        _headers = [headers retain];
+        _headers = headers;
         _adType = [self adTypeFromHeaders:headers];
 
         _networkType = [[self networkTypeFromHeaders:headers] copy];
         _preferredSize = CGSizeMake([[headers objectForKey:k_kWidthHeaderKey] floatValue],
                                     [[headers objectForKey:k_kHeightHeaderKey] floatValue]);
-        _clickTrackingURL = [[self URLFromHeaders:headers forKey:k_kClickthroughHeaderKey] retain];
-        _impressionTrackingURL = [[self URLFromHeaders:headers forKey:k_kImpressionTrackerHeaderKey] retain];
-        _failoverURL = [[self URLFromHeaders:headers forKey:k_kFailUrlHeaderKey] retain];
-        _interceptURLPrefix = [[self URLFromHeaders:headers forKey:k_kLaunchpageHeaderKey] retain];
+        _clickTrackingURL = [self URLFromHeaders:headers forKey:k_kClickthroughHeaderKey];
+        _impressionTrackingURL = [self URLFromHeaders:headers forKey:k_kImpressionTrackerHeaderKey];
+        _failoverURL = [self URLFromHeaders:headers forKey:k_kFailUrlHeaderKey];
+        _interceptURLPrefix = [self URLFromHeaders:headers forKey:k_kLaunchpageHeaderKey];
         _shouldInterceptLinks = [headers objectForKey:k_kInterceptLinksHeaderKey] ?
             [[headers objectForKey:k_kInterceptLinksHeaderKey] boolValue] : YES;
 
         _scrollable = [[headers objectForKey:k_kScrollableHeaderKey] boolValue];
         _refreshInterval = [self refreshIntervalFromHeaders:headers];
         _adResponseData = [data copy];
-        _nativeSDKParameters = [[self dictionaryFromHeaders:headers
-                                                     forKey:k_kNativeSDKParametersHeaderKey] retain];
+        _nativeSDKParameters = [self dictionaryFromHeaders:headers
+                                                     forKey:k_kNativeSDKParametersHeaderKey];
         _customSelectorName = [[headers objectForKey:k_kCustomSelectorHeaderKey] copy];
 
         NSString *orientationTemp = [headers objectForKey:k_kOrientationHeaderKey];
@@ -115,28 +115,12 @@ NSString * const k_kAdTypeMraid = @"mraid";
         NSString *customEventJSONString = [headers objectForKey:k_kCustomEventClassDataHeaderKey];
         NSData *customEventJSONData = [customEventJSONString dataUsingEncoding:NSUTF8StringEncoding];
         AdSdk_CJSONDeserializer *deserializer = [AdSdk_CJSONDeserializer deserializerWithNullObject:NULL];
-        _customEventClassData = [[deserializer deserializeAsDictionary:customEventJSONData
-                                                                 error:NULL] retain];
+        _customEventClassData = [deserializer deserializeAsDictionary:customEventJSONData
+                                                                 error:NULL];
     }
     return self;
 }
 
-- (void)dealloc
-{
-    [_headers release];
-    [_networkType release];
-    [_clickTrackingURL release];
-    [_impressionTrackingURL release];
-    [_failoverURL release];
-    [_interceptURLPrefix release];
-    [_adResponseData release];
-    [_adResponseHTMLString release];
-    [_nativeSDKParameters release];
-    [_customSelectorName release];
-    [_customEventClassData release];
-
-    [super dealloc];
-}
 
 - (MPAdType)adTypeFromHeaders:(NSDictionary *)headers
 {

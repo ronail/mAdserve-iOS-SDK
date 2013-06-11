@@ -43,12 +43,7 @@ NSString * const k_kHTTPHeaderFieldUserAgent = @"User-Agent";
 
 - (void)dealloc
 {
-    [_URL release];
     [_connection cancel];
-    [_connection release];
-    [_responseData release];
-    [_responseHeaders release];
-    [super dealloc];
 }
 
 #pragma mark - Public
@@ -98,9 +93,9 @@ NSString * const k_kHTTPHeaderFieldUserAgent = @"User-Agent";
 
 - (void)connectionDidFinishLoading:(NSURLConnection *)connection
 {
-    MP_MPAdConfiguration *configuration = [[[MP_MPAdConfiguration alloc]
+    MP_MPAdConfiguration *configuration = [[MP_MPAdConfiguration alloc]
                                          initWithHeaders:self.responseHeaders
-                                         data:self.responseData] autorelease];
+                                         data:self.responseData];
     [self.delegate communicatorDidReceiveAdConfiguration:configuration];
 }
 

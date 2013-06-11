@@ -29,7 +29,7 @@ extern const CGFloat k_kMoPubRequestRetryInterval;
     MP_MPBannerAdapterManager *_adapterManager;
     MP_MPBannerDelegateHelper *_delegateHelper;
 
-    MP_MPAdView *_adView;
+    MP_MPAdView *__weak _adView;
 
     BOOL _adActionInProgress;
     UIView *_nextAdContentView;
@@ -43,9 +43,9 @@ extern const CGFloat k_kMoPubRequestRetryInterval;
 
 @property (nonatomic, assign, getter=isLoading) BOOL loading;
 
-@property (nonatomic, assign) MP_MPAdView *adView;
+@property (nonatomic, weak) MP_MPAdView *adView;
 
-@property (nonatomic, retain) MP_MPTimer *autorefreshTimer;
+@property (nonatomic, strong) MP_MPTimer *autorefreshTimer;
 @property (nonatomic, assign) BOOL ignoresAutorefresh;
 
 - (void)loadAdWithURL:(NSURL *)URL;

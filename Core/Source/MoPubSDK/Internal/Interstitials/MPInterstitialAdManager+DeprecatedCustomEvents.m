@@ -25,7 +25,6 @@
     _hasRecordedClickForCurrentInterstitial = NO;
 
     [_currentAdapter unregisterDelegate];
-    [_currentAdapter release];
     _currentAdapter = _nextAdapter;
     _nextAdapter = nil;
 

@@ -28,8 +28,6 @@
 {
     [_interstitial setDelegate:nil];
     [_interstitial setCustomMethodDelegate:nil];
-    [_interstitial release];
-    [super dealloc];
 }
 
 - (void)showInterstitialFromViewController:(UIViewController *)controller

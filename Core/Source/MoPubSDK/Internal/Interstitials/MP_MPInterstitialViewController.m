@@ -16,7 +16,7 @@ static NSString * const kCloseButtonXImageName = @"MPCloseButtonX.png";
 
 @interface MP_MPInterstitialViewController ()
 
-@property (nonatomic, retain) UIButton *closeButton;
+@property (nonatomic, strong) UIButton *closeButton;
 
 - (void)setCloseButtonImageWithImageNamed:(NSString *)imageName;
 - (void)setCloseButtonStyle:(MPInterstitialCloseButtonStyle)style;
@@ -35,11 +35,6 @@ static NSString * const kCloseButtonXImageName = @"MPCloseButtonX.png";
 @synthesize closeButtonStyle = _closeButtonStyle;
 @synthesize orientationType = _orientationType;
 
-- (void)dealloc
-{
-    [_closeButton release];
-    [super dealloc];
-}
 
 - (void)viewDidLoad
 {
@@ -121,7 +116,7 @@ static NSString * const kCloseButtonXImageName = @"MPCloseButtonX.png";
 - (UIButton *)closeButton
 {
     if (!_closeButton) {
-        _closeButton = [[UIButton buttonWithType:UIButtonTypeCustom] retain];
+        _closeButton = [UIButton buttonWithType:UIButtonTypeCustom];
         _closeButton.autoresizingMask = UIViewAutoresizingFlexibleLeftMargin |
         UIViewAutoresizingFlexibleBottomMargin;
 

@@ -20,7 +20,7 @@
 
 @interface MP_MPAdBrowserController : UIViewController <UIWebViewDelegate, UIActionSheetDelegate>
 {
-	id<MPAdBrowserControllerDelegate> _delegate;
+	id<MPAdBrowserControllerDelegate> __weak _delegate;
 	UIWebView *_webView;
 	UIBarButtonItem *_backButton;
 	UIBarButtonItem *_forwardButton;
@@ -47,15 +47,15 @@
     BOOL _isPerformingPresentationAnimation;
 }
 
-@property (nonatomic, retain) IBOutlet UIWebView *webView;
-@property (nonatomic, retain) IBOutlet UIBarButtonItem *backButton;
-@property (nonatomic, retain) IBOutlet UIBarButtonItem *forwardButton;
-@property (nonatomic, retain) IBOutlet UIBarButtonItem *refreshButton;
-@property (nonatomic, retain) IBOutlet UIBarButtonItem *safariButton;
-@property (nonatomic, retain) IBOutlet UIBarButtonItem *doneButton;
-@property (nonatomic, retain) IBOutlet UIBarButtonItem *spinnerItem;
+@property (nonatomic, strong) IBOutlet UIWebView *webView;
+@property (nonatomic, strong) IBOutlet UIBarButtonItem *backButton;
+@property (nonatomic, strong) IBOutlet UIBarButtonItem *forwardButton;
+@property (nonatomic, strong) IBOutlet UIBarButtonItem *refreshButton;
+@property (nonatomic, strong) IBOutlet UIBarButtonItem *safariButton;
+@property (nonatomic, strong) IBOutlet UIBarButtonItem *doneButton;
+@property (nonatomic, strong) IBOutlet UIBarButtonItem *spinnerItem;
 
-@property (nonatomic, assign) id<MPAdBrowserControllerDelegate> delegate;
+@property (nonatomic, weak) id<MPAdBrowserControllerDelegate> delegate;
 @property (nonatomic, copy) NSURL *URL;
 
 - (id)initWithURL:(NSURL *)URL delegate:(id<MPAdBrowserControllerDelegate>)delegate;

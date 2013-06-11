@@ -14,8 +14,8 @@
 @interface MP_MPInterstitialAdManager : NSObject <MPAdServerCommunicatorDelegate,
     MPBaseInterstitialAdapterDelegate>
 {
-    MP_MPInterstitialAdController *_interstitialAdController;
-    id<MPInterstitialAdManagerDelegate> _delegate;
+    MP_MPInterstitialAdController *__weak _interstitialAdController;
+    id<MPInterstitialAdManagerDelegate> __weak _delegate;
 
     MP_MPAdServerCommunicator *_communicator;
     BOOL _loading;
@@ -36,8 +36,8 @@
 }
 
 @property (nonatomic, assign, getter=isLoading) BOOL loading;
-@property (nonatomic, assign) MP_MPInterstitialAdController *interstitialAdController;
-@property (nonatomic, assign) id<MPInterstitialAdManagerDelegate> delegate;
+@property (nonatomic, weak) MP_MPInterstitialAdController *interstitialAdController;
+@property (nonatomic, weak) id<MPInterstitialAdManagerDelegate> delegate;
 @property (nonatomic, readonly, copy) NSURL *failoverURL;
 
 - (void)loadAdWithURL:(NSURL *)URL;
