@@ -3063,7 +3063,7 @@ static float animationDuration = 0.50;
 - (void)toggleToolbars {
 
     if (self.videoTopToolbar || self.videoBottomToolbar) {
-        BOOL toolbarsHidden;
+        BOOL toolbarsHidden = NO;
 
         if (self.videoTopToolbar) {
             toolbarsHidden = self.videoTopToolbar.alpha == 0.00 ? YES : NO;
