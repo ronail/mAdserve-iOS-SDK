@@ -6,6 +6,6 @@
 
 @end
 
-@interface DummyURL
+@interface DummyURL : NSObject 
 
 @end

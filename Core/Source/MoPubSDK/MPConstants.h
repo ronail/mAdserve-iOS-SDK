@@ -27,6 +27,6 @@
 // In-app purchase constants.
 #define STORE_RECEIPT_SUFFIX        @"/m/purchase"
 
-// Constant for conditional compilation of -[UIDevice uniqueIdentifier] (UDID). The SDK will never
-// utilize -[UIDevice uniqueIdentifier] if this value is set to 0.
+// Constant for conditional compilation of -[UIDevice identifierForVendor] (UDID). The SDK will never
+// utilize -[UIDevice identifierForVendor] if this value is set to 0.
 #define MOPUB_ENABLE_UDID           0

@@ -115,12 +115,12 @@ NSString *MP_MPAdvertisingIdentifier()
     }
     #if MOPUB_ENABLE_UDID
     else {
-        identifier = MP_MPSHA1Digest([[UIDevice currentDevice] uniqueIdentifier]);
+        identifier = MP_MPSHA1Digest([[UIDevice currentDevice] identifierForVendor]);
         cachedIdentifier = [NSString stringWithFormat:@"sha:%@", [identifier uppercaseString]];
     }
     #endif
 #elif MOPUB_ENABLE_UDID
-    NSString *identifier = MPSHA1Digest([[UIDevice currentDevice] uniqueIdentifier]);
+    NSString *identifier = MPSHA1Digest([[UIDevice currentDevice] identifierForVendor]);
     cachedIdentifier = [NSString stringWithFormat:@"sha:%@", [identifier uppercaseString]];
 #endif
 

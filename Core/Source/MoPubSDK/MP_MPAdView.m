@@ -77,7 +77,7 @@ static NSString * const kNewContentViewKey = @"NewContentView";
 		_animationType = MPAdAnimationTypeNone;
 		_originalSize = size;
 		_allowedNativeAdOrientation = MPNativeAdOrientationAny;
-        _adUnitId = (adUnitId) ? [adUnitId copy] : [[NSString alloc] initWithString:DEFAULT_PUB_ID];
+        _adUnitId = (adUnitId) ? [adUnitId copy] : DEFAULT_PUB_ID;
 		_adManager = adManager;
         _adManager.adView = self;
     }
